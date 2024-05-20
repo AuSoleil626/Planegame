@@ -16,5 +16,4 @@
 - 背景的无缝滚动
 - 游戏失败或者成功后界面的显示
 - 制作该游戏中运用的设计模式：工厂模式，抽象工厂模式，适配器模式，装饰器模式
-<video controls height='100%' width='100%' src="https://github.com/AuSoleil626/Planegame/blob/main/%E9%A3%9E%E6%9C%BA%E5%A4%A7%E6%88%98%202024-05-20%2013-04-00.mp4"></video>
 
