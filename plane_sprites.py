@@ -68,19 +68,38 @@ class EnemyFactory():
         self.enemies = pygame.sprite.Group()
         self.bosses = pygame.sprite.Group()
         self.BulletFactory=BulletFactory     #子弹工厂
+        self.common_destroy_image=[]
+        for i in range(19):
+            self.common_destroy_image.append(pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中"+str(i+1)+".png"),(162,164)))
+        self.Boss_destroy_image=[]
+        for i in range(19):
+            self.Boss_destroy_image.append(pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中"+str(i+1)+".png"),(240,240)))
+            self.Boss_destroy_image.append(
+                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
+                                       (240, 240)))
+            self.Boss_destroy_image.append(
+                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
+                                       (240, 240)))
+            self.Boss_destroy_image.append(
+                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
+                                       (240, 240)))
+            self.Boss_destroy_image.append(
+                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
+                                       (240, 240)))
+
     def createEnemy(self,a,EnemyType):
         if EnemyType=="Enemy_base":
-            enemy = Enemy(a,self.BulletFactory)
+            enemy = Enemy(a,self.BulletFactory,self.common_destroy_image)
             self.enemies.add(enemy)
         elif EnemyType=="EnemyBoss":
-            enemy = EnemyBoss(a,self.BulletFactory)
+            enemy = EnemyBoss(a,self.BulletFactory,self.Boss_destroy_image)
             self.bosses.add(enemy)
         return
 
 
 class Enemy(GameSprite):  #敌人基类
     """敌机精灵"""
-    def __init__(self,a,BulletFactory,magnitude=(162,164)):
+    def __init__(self,a,BulletFactory,destroyimage_group,magnitude=(162,164)):
         # 1.调用父类方法创建敌机精灵，并指定敌机图像
         super().__init__("./Pictures/敌人01/敌人攻击01/敌人攻击01.png",1,True,magnitude,False)
         # 2.设置敌机的随机速度(初始) 1~3
@@ -98,26 +117,9 @@ class Enemy(GameSprite):  #敌人基类
         # 敌机血量
         self.health = 5
         self.isDie=False
-        self.image_group_destroy=[]
+        self.image_group_destroy=destroyimage_group
         self.image_destroy_index=0
         self.load_image(magnitude)
-        self.load_destroy_image()
-    def load_destroy_image(self,magnitude=(162,164)):
-        for i in range(19):
-            self.image_group_destroy.append(pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中"+str(i+1)+".png"),magnitude))
-
-            # self.image_group_destroy.append(
-            #     pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中" + str(i + 1) + ".png"),
-            #                            magnitude))
-            # self.image_group_destroy.append(
-            #     pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中" + str(i + 1) + ".png"),
-            #                            magnitude))
-            # self.image_group_destroy.append(
-            #     pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中" + str(i + 1) + ".png"),
-            #                            magnitude))
-            # self.image_group_destroy.append(
-            #     pygame.transform.scale(pygame.image.load("./Pictures/敌人01/敌人击中01/敌人击中" + str(i + 1) + ".png"),
-            #                            magnitude))
 
     def load_image(self,magnitude=(162,164)):
         for i in range(4):
@@ -173,8 +175,8 @@ class Enemy(GameSprite):  #敌人基类
 
 class EnemyBoss(Enemy):  #boss敌人
     """boss敌人精灵"""
-    def __init__(self,a,BulletFactory):
-        super().__init__(a,BulletFactory,(240,240))
+    def __init__(self,a,BulletFactory,destroyimage_group):
+        super().__init__(a,BulletFactory,destroyimage_group,(240,240))
         pygame.time.set_timer(self.shoot_bullet_event_id, 0) # 取消定时器事件，boss敌人不发射子弹
         self.speed=0.5
         self.maxhealth=50
@@ -184,21 +186,6 @@ class EnemyBoss(Enemy):  #boss敌人
         self.timeinterval=0
         self.creat_bullet_interval=100
         # 1.设置boss敌人的随机速度(初始) 1~3
-    def load_destroy_image(self):
-        for i in range(19):
-            self.image_group_destroy.append(pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中"+str(i+1)+".png"),(240,240)))
-            self.image_group_destroy.append(
-                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
-                                       (240, 240)))
-            self.image_group_destroy.append(
-                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
-                                       (240, 240)))
-            self.image_group_destroy.append(
-                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
-                                       (240, 240)))
-            self.image_group_destroy.append(
-                pygame.transform.scale(pygame.image.load("./Pictures/BOSS/BOSS被击中/BOSS击中" + str(i + 1) + ".png"),
-                                       (240, 240)))
 
 
     def load_image(self,magnitude=(162,164)):
