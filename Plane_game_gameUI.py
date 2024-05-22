@@ -35,20 +35,22 @@ class HealthUI:
         self.screen.blit(text_surface, text_rect)  # 在屏幕上绘制血量信息文本
 class BossHealthUI:
     def __init__(self, screen, boss):
-        #坐标在画面正上方
-        self.x = SCREEN_RECT.centerx - 150
-        self.y = 10
+        self.healthBG=pygame.image.load('./Pictures/UI/血条2倍.png')
+        self.healthBar_Full=pygame.image.load('./Pictures/UI/血条绿.png')
+        self.healthBar=self.healthBar_Full
         self.screen = screen
         self.boss = boss
-        self.max_health = self.boss.maxhealth
-        self.health = self.max_health
-        self.length = 300
-        self.height = 20
+        #设置两个图片的位置在屏幕正上方
+        self.healthBG_rect=self.healthBG.get_rect(center=(self.screen.get_width()/2,30))
+        self.healthBar_rect=self.healthBar.get_rect(center=(self.screen.get_width()/2,30))
 
+        self.screen = screen
+        self.boss = boss
     def draw(self):
-        # 绘制血量条的底色
-        self.health=self.boss.health
-        pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.length, self.height))
-        # 根据血量动态绘制血量条
-        health_width = int((self.health / self.max_health) * self.length)
-        pygame.draw.rect(self.screen, (0, 255, 0), (self.x, self.y, health_width, self.height))
+        percent=self.boss.health/self.boss.maxhealth
+        #根据boss血量裁剪血条
+        crop_rect=pygame.Rect(0,0,percent*268,40)
+        self.healthBar=self.healthBar_Full.subsurface(crop_rect)
+        #显示boss血量
+        self.screen.blit(self.healthBG,self.healthBG_rect)
+        self.screen.blit(self.healthBar,self.healthBar_rect)
