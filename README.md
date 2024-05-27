@@ -1,5 +1,12 @@
 # 外卖员大战外星人
 组员：罗嘉文，魏启哲，席琳峰，陈延平，朱俊宇
+![43f1cc150067797ccb09a321f5c3190](https://github.com/AuSoleil626/Planegame/assets/142735159/30c3d7cd-e603-4655-9a52-8280ddd97b09)
+
+![d96066ba2af2c5bfe6fe0f818b95ea8](https://github.com/AuSoleil626/Planegame/assets/142735159/b52a3475-eea7-4bc6-89d7-701b8785ac42)
+
+![795f164801dec95d89b3a09462cff31](https://github.com/AuSoleil626/Planegame/assets/142735159/7f1684fd-fc14-40b1-a047-4c9ccaadfb76)
+
+![dc5fea16d1313046337ed127f1a9f77](https://github.com/AuSoleil626/Planegame/assets/142735159/29654ce6-f303-403a-bd2d-059e2d7e3e08)
 
 游戏玩法
 
